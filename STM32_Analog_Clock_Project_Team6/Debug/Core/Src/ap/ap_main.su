@@ -1,0 +1,5 @@
+../Core/Src/ap/ap_main.c:28:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/ap/ap_main.c:40:6:ap_init	8	static
+../Core/Src/ap/ap_main.c:52:6:ap_timeClockMode	16	static
+../Core/Src/ap/ap_main.c:68:6:ap_stopWatchMode	16	static
+../Core/Src/ap/ap_main.c:86:5:ap_main	8	static

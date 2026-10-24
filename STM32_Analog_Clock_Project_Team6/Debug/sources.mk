@@ -31,6 +31,7 @@ Core/Src/driver/ds3231 \
 Core/Src/driver/fnd \
 Core/Src/driver/lcd \
 Core/Src/driver/led \
+Core/Src/driver/stepmotor \
 Core/Src \
 Core/Startup \
 Drivers/STM32F4xx_HAL_Driver/Src \

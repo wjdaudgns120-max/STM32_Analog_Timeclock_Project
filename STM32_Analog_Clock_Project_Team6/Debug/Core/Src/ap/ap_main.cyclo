@@ -1,5 +1,6 @@
-../Core/Src/ap/ap_main.c:28:6:HAL_TIM_PeriodElapsedCallback	3
-../Core/Src/ap/ap_main.c:40:6:ap_init	1
-../Core/Src/ap/ap_main.c:52:6:ap_timeClockMode	2
-../Core/Src/ap/ap_main.c:68:6:ap_stopWatchMode	2
-../Core/Src/ap/ap_main.c:86:5:ap_main	3
+../Core/Src/ap/ap_main.c:34:6:HAL_TIM_PeriodElapsedCallback	3
+../Core/Src/ap/ap_main.c:50:6:ap_secHandTask	2
+../Core/Src/ap/ap_main.c:69:6:ap_init	1
+../Core/Src/ap/ap_main.c:83:6:ap_timeClockMode	2
+../Core/Src/ap/ap_main.c:99:6:ap_stopWatchMode	2
+../Core/Src/ap/ap_main.c:117:5:ap_main	3

@@ -19,6 +19,7 @@ ds3231_datetime_t rtc_datetime = {
 		.date = {.year = 26, .month = 10, .date = 22, .day = 5},
 		.time = {.hour = 11, .min	= 44, .sec 	= 30}
 };
+
 ds3231_time_t rtc_time;
 ds3231_date_t rtc_date;
 
@@ -35,12 +36,9 @@ void TimeClock_init(void)
 	timeClockData.msec = 0;
 }
 
+// 시간 갱신은 TimeClock_task()에서 RTC 값으로 하므로 여기서는 반환만 한다.
 TimeClock_t *TimeClock_getTimeData(void)
 {
-	timeClockData.hour = rtc_time.hour;
-	timeClockData.min = rtc_time.min;
-	timeClockData.sec = rtc_time.sec;
-
 	return &timeClockData;
 }
 
@@ -90,23 +88,34 @@ void TimeClock_ISR(void)
 //	TimeClock_getTimeData();
 }
 
+// 100ms마다 RTC를 읽어서 초가 바뀌었을 때만 시계 데이터를 갱신한다.
 void TimeClock_task(void)
 {
-	static uint8_t prevSec = 0;
-	static uint8_t prevHour = 0;
+	static uint32_t prevTick = 0;
+	static uint8_t prevHour = 0xff;
 
-	if(timeClockData.sec == prevSec) {
+	if (HAL_GetTick() - prevTick < 100) {
 		return;
 	}
-	prevSec = timeClockData.sec;
-	ds3231_getTime(&rtc_time);
+	prevTick = HAL_GetTick();
 
-	if(timeClockData.hour == prevHour) {
+	if (ds3231_getTime(&rtc_time) != HAL_OK) {
 		return;
 	}
-	prevHour = timeClockData.hour;
+	if (rtc_time.sec == timeClockData.sec && rtc_time.min == timeClockData.min) {
+		return;
+	}
+
+	timeClockData.hour = rtc_time.hour;
+	timeClockData.min = rtc_time.min;
+	timeClockData.sec = rtc_time.sec;
+	timeClockData.msec = 0;
+
+	if (rtc_time.hour == prevHour) {
+		return;
+	}
+	prevHour = rtc_time.hour;
 	ds3231_getDate(&rtc_date);
-	//TimeClock_dispTime();
 }
 
 

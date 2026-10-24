@@ -11,6 +11,7 @@ RM := rm -rf
 -include sources.mk
 -include Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
+-include Core/Src/driver/stepmotor/subdir.mk
 -include Core/Src/driver/led/subdir.mk
 -include Core/Src/driver/lcd/subdir.mk
 -include Core/Src/driver/fnd/subdir.mk
@@ -69,8 +70,8 @@ all: main-build
 main-build: STM32_Analog_Clock_Project_Team6.elf secondary-outputs
 
 # Tool invocations
-STM32_Analog_Clock_Project_Team6.elf STM32_Analog_Clock_Project_Team6.map: $(OBJS) $(USER_OBJS) D:\github\STM32-Analog-Clock-Project-Team6\STM32_Analog_Clock_Project_Team6\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "STM32_Analog_Clock_Project_Team6.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\github\STM32-Analog-Clock-Project-Team6\STM32_Analog_Clock_Project_Team6\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Analog_Clock_Project_Team6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+STM32_Analog_Clock_Project_Team6.elf STM32_Analog_Clock_Project_Team6.map: $(OBJS) $(USER_OBJS) D:\git\STM32-Analog-Clock-Project-Team6\STM32_Analog_Clock_Project_Team6\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "STM32_Analog_Clock_Project_Team6.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\git\STM32-Analog-Clock-Project-Team6\STM32_Analog_Clock_Project_Team6\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Analog_Clock_Project_Team6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

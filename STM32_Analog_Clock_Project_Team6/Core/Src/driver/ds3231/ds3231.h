@@ -29,7 +29,7 @@ typedef struct {
 }ds3231_datetime_t;
 
 void ds3231_init(I2C_HandleTypeDef *ds3231_hi2c);
-void ds3231_getTime(ds3231_time_t *t);
+HAL_StatusTypeDef ds3231_getTime(ds3231_time_t *t);
 void ds3231_setTime(const ds3231_time_t *t);
 void ds3231_getDate(ds3231_date_t *d);
 void ds3231_setDate(const ds3231_date_t *d);

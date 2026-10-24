@@ -33,7 +33,8 @@ Core/Src/ap/ap_main.o: ../Core/Src/ap/ap_main.c ../Core/Src/ap/ap_main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Core/Src/ap/Display/Display.h ../Core/Src/ap/../driver/fnd/fnd.h \
  ../Core/Src/ap/../driver/button/button.h \
- ../Core/Src/ap/../driver/led/led.h
+ ../Core/Src/ap/../driver/led/led.h \
+ ../Core/Src/ap/../driver/stepmotor/stepmotor.h
 ../Core/Src/ap/ap_main.h:
 ../Core/Src/ap/StopWatch/StopWatch.h:
 ../Core/Src/ap/TimeClock/TimeClock.h:
@@ -71,3 +72,4 @@ Core/Src/ap/ap_main.o: ../Core/Src/ap/ap_main.c ../Core/Src/ap/ap_main.h \
 ../Core/Src/ap/../driver/fnd/fnd.h:
 ../Core/Src/ap/../driver/button/button.h:
 ../Core/Src/ap/../driver/led/led.h:
+../Core/Src/ap/../driver/stepmotor/stepmotor.h:

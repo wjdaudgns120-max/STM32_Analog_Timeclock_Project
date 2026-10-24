@@ -30,8 +30,10 @@ void ds3231_init(I2C_HandleTypeDef *hi2c)
 	ds3231_hi2c = hi2c;
 }
 
-void ds3231_getTime(ds3231_time_t *t)
+HAL_StatusTypeDef ds3231_getTime(ds3231_time_t *t)
 {
+	HAL_StatusTypeDef ret;
+
 	uint8_t buf[3];
 	uint8_t ds3231_regAddr = DS3231_REG_SEC;
 
@@ -39,11 +41,15 @@ void ds3231_getTime(ds3231_time_t *t)
 //	HAL_I2C_Master_Transmit(ds3231_hi2c, DS3231_I2C_ADDR, &ds3231_regAddr, 1, DS3231_TIMEOUT_MS);
 //	HAL_I2C_Master_Receive(ds3231_hi2c, DS3231_I2C_ADDR, buf, 3, DS3231_TIMEOUT_MS);
 
-	HAL_I2C_Mem_Read(ds3231_hi2c, DS3231_I2C_ADDR, (uint16_t)ds3231_regAddr, 1, buf, 3, DS3231_TIMEOUT_MS);
+	ret = HAL_I2C_Mem_Read(ds3231_hi2c, DS3231_I2C_ADDR, (uint16_t)ds3231_regAddr, 1, buf, 3, DS3231_TIMEOUT_MS);
+	if (ret != HAL_OK) {
+		return ret;	// 읽기 실패 시 이전 값을 유지
+	}
 
 	t->sec  = bcd2bin(buf[0] & 0x7f);
 	t->min  = bcd2bin(buf[1] & 0x7f);
-	t->hour = bcd2bin(buf[2] & 0x7f);
+	t->hour = bcd2bin(buf[2] & 0x3f);
+	return HAL_OK;
 }
 
 void ds3231_setTime(const ds3231_time_t *t)

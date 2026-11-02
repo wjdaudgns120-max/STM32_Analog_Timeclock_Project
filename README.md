@@ -6,6 +6,10 @@ DS3231 RTC의 시간을 실제 바늘 위치로 바꿔 움직이고, 스톱워�
 > 4인 팀 프로젝트 (2026.10)
 > **담당: 스텝 모터 드라이버와 바늘 구동 로직, RTC 초 단위 동기화** (PR #4, #5)
 
+## System Overview
+
+![System Overview](docs/system_overview.png)
+
 ## 주요 기능
 
 | 모드 | 동작 |

@@ -16,8 +16,8 @@ static TimeClock_t 	timeClockData; // 중심 데이터
 static TimeDate_t	timeDateData;
 
 ds3231_datetime_t rtc_datetime = {
-		.date = {.year = 26, .month = 10, .date = 22, .day = 5},
-		.time = {.hour = 11, .min	= 44, .sec 	= 30}
+		.date = {.year = 26, .month = 10, .date = 24, .day = 6},
+		.time = {.hour = 19, .min	= 18, .sec 	= 30}
 };
 
 ds3231_time_t rtc_time;
@@ -26,6 +26,7 @@ ds3231_date_t rtc_date;
 void TimeClock_init(void)
 {
 	ds3231_init(&hi2c1);
+//	ds3231_setDateTime(&rtc_datetime);
 	ds3231_getDateTime(&rtc_datetime);
 	ds3231_getTime(&rtc_time);
 	ds3231_getDate(&rtc_date);
@@ -65,16 +66,19 @@ static void TimeClock_incMSec(void)
 		return;
 	}
 	timeClockData.msec = 0;
+
 	if (timeClockData.sec < 59) {
 		timeClockData.sec++;
 		return;
 	}
 	timeClockData.sec = 0;
+
 	if (timeClockData.min < 59) {
 		timeClockData.min++;
 		return;
 	}
 	timeClockData.min = 0;
+
 	if (timeClockData.hour < 23) {
 		timeClockData.hour++;
 		return;

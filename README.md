@@ -10,7 +10,26 @@ DS3231 RTC의 시간을 실제 바늘 위치로 바꿔 움직이고, 스톱워�
 
 ## System Overview
 
-![System Overview](docs/system_overview.png)
+![H/W Structure](docs/hw_structure.png)
+
+### System Flow
+
+위 그림의 블록을 따라 데이터가 이렇게 흐릅니다.
+
+1. **시간 소스 (TIM4 · RTC DS3231)**
+   TIM4가 10ms마다 시계와 스톱워치를 카운트합니다. 시계는 100ms마다 I2C로 DS3231을 읽어 RTC 초에 맞춥니다.
+2. **버튼 → 모드 FSM**
+   MODE(PC0)로 `TIME_CLOCK ↔ STOP_WATCH`를 바꾸고, 스톱워치 모드에서는 RUN/STOP(PC1)과 CLEAR(PC3)로 측정을 제어합니다.
+3. **시간 → 바늘 목표 위치 (`ap_HandTask`)**
+   현재 모드의 시·분·초를 한 바퀴 4096 스텝 기준의 목표 위치로 바꿉니다. 한 단계 아래 단위까지 반영해 목표가 연속으로 움직입니다.
+4. **모터 구동 (TIM2 1ms → ULN2003 × 3 → 28BYJ-48 × 3)**
+   TIM2 인터럽트에서 세 모터가 목표 쪽으로 한 스텝씩 하프스텝 패턴을 출력합니다. 평소에는 10ms 간격, 모드 전환처럼 크게 벌어지면 3ms 간격으로 따라잡습니다.
+5. **표시 (LCD · FND · LED)**
+   LCD(I2C 0x27)에 시각·날짜 또는 스톱워치 시간을, FND에 `분.초`를 표시합니다. FND는 TIM3 1ms 인터럽트로 한 자리씩 스캔합니다. LED 4개는 현재 모드와 RUN/STOP 상태를 보여 줍니다.
+
+> **설계 원칙**: super loop는 LCD의 I2C 출력 때문에 느려서, 시간에 민감한 모터 스텝·FND 스캔·시간 카운트는 모두 타이머 인터럽트에서 처리합니다.
+
+![Software Flow](docs/software_flow.png)
 
 ## 주요 기능
 
@@ -26,6 +45,9 @@ DS3231 RTC의 시간을 실제 바늘 위치로 바꿔 움직이고, 스톱워�
 | LED | 시계 모드(PB15) · 스톱워치 모드(PB14) · RUN(PC4) · STOP(PB13) |
 
 ### 상태 머신
+
+![FSM](docs/fsm.png)
+
 - **모드 전환 (ap_main)**: MODE 버튼을 뗄 때마다 `TIME_CLOCK` ↔ `STOP_WATCH`
 - **스톱워치 (StopWatch_task)**: RUN/STOP 버튼을 누를 때마다 `STOP` ↔ `RUN`, CLEAR 버튼을 떼면 0으로 초기화 후 `STOP`
 - 시간 카운트는 TIM4 인터럽트에서 하므로, **모드를 바꿔도 시계와 스톱워치 모두 계속 측정**됩니다.
@@ -111,6 +133,8 @@ StepMotor_setTarget(&motor_hour, hourMin  * STEPS_PER_REV / 720);
 | FND 세그먼트 | PA6, PA9, PB5, PB10, PA8, PA7, PB3, PB4 |
 
 ## 소프트웨어 구조
+
+![S/W Structure](docs/sw_structure.png)
 
 ```
 STM32_Analog_Clock_Project_Team6/Core/Src

@@ -1,6 +1,0 @@
-../Core/Src/ap/TimeClock/TimeClock.c:26:6:TimeClock_init	8	static
-../Core/Src/ap/TimeClock/TimeClock.c:40:14:TimeClock_getTimeData	4	static
-../Core/Src/ap/TimeClock/TimeClock.c:45:13:TimeClock_getDateData	8	static
-../Core/Src/ap/TimeClock/TimeClock.c:61:13:TimeClock_incMSec	4	static
-../Core/Src/ap/TimeClock/TimeClock.c:85:6:TimeClock_ISR	8	static
-../Core/Src/ap/TimeClock/TimeClock.c:92:6:TimeClock_task	8	static

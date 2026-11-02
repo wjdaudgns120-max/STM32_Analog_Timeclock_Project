@@ -1,9 +1,0 @@
-../Core/Src/driver/ds3231/ds3231.c:18:16:bcd2bin	16	static
-../Core/Src/driver/ds3231/ds3231.c:23:16:bin2bcd	16	static
-../Core/Src/driver/ds3231/ds3231.c:28:6:ds3231_init	16	static
-../Core/Src/driver/ds3231/ds3231.c:33:19:ds3231_getTime	40	static
-../Core/Src/driver/ds3231/ds3231.c:55:6:ds3231_setTime	32	static
-../Core/Src/driver/ds3231/ds3231.c:67:6:ds3231_getDate	40	static
-../Core/Src/driver/ds3231/ds3231.c:84:6:ds3231_setDate	32	static
-../Core/Src/driver/ds3231/ds3231.c:97:6:ds3231_getDateTime	40	static
-../Core/Src/driver/ds3231/ds3231.c:117:6:ds3231_setDateTime	32	static

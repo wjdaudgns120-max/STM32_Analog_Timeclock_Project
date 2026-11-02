@@ -3,7 +3,7 @@
 STM32F411RE와 **스텝 모터 3개(시·분·초침)** 로 만든 아날로그 시계입니다.
 DS3231 RTC의 시간을 실제 바늘 위치로 바꿔 움직이고, 스톱워치 모드에서는 같은 바늘로 경과 시간을 보여 줍니다. 시간과 날짜는 I2C LCD에도 함께 표시됩니다.
 
-> 4인 팀 프로젝트 (2026.10) · 원본 저장소: [Park-Yul/STM32-Analog-Clock-Project-Team6](https://github.com/Park-Yul/STM32-Analog-Clock-Project-Team6)
+> 4인 팀 프로젝트 (2026.10)
 > **담당: 스텝 모터 드라이버와 바늘 구동 로직, RTC 초 단위 동기화** (PR #4, #5)
 
 ## 주요 기능

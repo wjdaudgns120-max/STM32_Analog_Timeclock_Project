@@ -13,7 +13,7 @@
 #define STEP_COUNT      8
 #define STEPS_PER_REV   4096   // 28BYJ-48 하프스텝 기준 1바퀴
 #define STEP_DELAY_MS   2
-#define STEP_FAST_DELAY_MS      2   // 목표와 많이 벌어졌을 때 (모드 변경 등)
+#define STEP_FAST_DELAY_MS      3   // 목표와 많이 벌어졌을 때 (모드 변경 등), 2ms는 탈조 발생
 #define STEP_NORMAL_DELAY_MS   10   // 평소 추종 속도 (60초 1바퀴 = 약 14.6ms/스텝보다 빠르게)
 #define STEP_CATCHUP_THRESHOLD   (STEPS_PER_REV / 60)   // 1초 이상 차이나면 빠르게
 

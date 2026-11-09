@@ -15,3 +15,6 @@ Release/
 
 # Archives
 *.zip
+
+# Eclipse / CubeIDE workspace settings
+.settings/
